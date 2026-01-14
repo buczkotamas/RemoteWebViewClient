@@ -444,7 +444,7 @@ int RemoteWebView::jpeg_draw_cb_(JPEGDRAW *p) {
 }
 
 bool RemoteWebView::ws_send_touch_event_(proto::TouchType type, int x, int y, uint8_t pid) {
-  if (!ws_client_ || !ws_send_mtx_ || !esp_websocket_client_is_connected(ws_client_))
+  if (touch_disabled_ || !ws_client_ || !ws_send_mtx_ || !esp_websocket_client_is_connected(ws_client_))
     return false;
 
   // clamp into 16-bit
